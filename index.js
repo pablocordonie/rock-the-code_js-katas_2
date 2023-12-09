@@ -222,3 +222,195 @@ const inputFilter = (event) => streamers_3.filter(streamer => {
 });
 
 input.addEventListener('input', inputFilter);
+
+// Ejercicio 6 - Find
+
+// 6.1 Dado el siguiente array, usa .find() para econtrar el número 100.
+
+const numbers = [32, 21, 63, 95, 100, 67, 43];
+
+const oneHundred = numbers.find(number => number === 100);
+
+console.log(oneHundred);
+
+// 6.2 Dado el siguiente array, usa .find() para encontrar la pelicula del año 2010.
+
+const movies = [
+    { title: 'Madagascar', stars: 4.5, date: 2015 },
+    { title: 'Origen', stars: 5, date: 2010 },
+    { title: 'Your Name', stars: 5, date: 2016 }
+];
+
+const movieFrom2010 = movies.find(movie => movie.date === 2010);
+
+console.log(movieFrom2010);
+
+// 6.3 Dado el siguiente javascript, usa .find() para econtrar el alien de nombre 'Cucushumushu' y la mutación 'Porompompero'. Una vez que los encuentres, usa spread operator para fusionarlos teniendo en cuenta que el objeto de la mutación lo queremos meter en la propiedad .mutation del objeto fusionado.
+
+const aliens = [
+    { name: 'Zalamero', planet: 'Eden', age: 4029 },
+    { name: 'Paktu', planet: 'Andromeda', age: 32 },
+    { name: 'Cucushumushu', planet: 'Marte', age: 503021 }
+];
+const mutations = [
+    { name: 'Porompompero', description: 'Hace que el alien pueda adquirir la habilidad de tocar el tambor' },
+    { name: 'Fly me to the moon', description: 'Permite volar, solo y exclusivamente a la luna' },
+    { name: 'Andando que es gerundio', description: 'Invoca a un señor mayor como Personal Trainer' }
+];
+
+const alien = aliens.find(alien => alien.name === 'Cucushumushu');
+
+const mutation = mutations.find(mutation => mutation.name === 'Porompompero');
+
+const updatedAlien = { ...alien, mutation: mutation };
+
+console.log(updatedAlien);
+
+// Ejercicio 7 - Reduce
+
+// 7.1 Dado el siguiente array, haz una suma de todos las notas de los exámenes de los alumnos usando la función .reduce().
+
+const exams = [
+    { name: 'Yuyu Cabeza Crack', score: 5 },
+    { name: 'Maria Aranda Jimenez', score: 1 },
+    { name: 'Cristóbal Martínez Lorenzo', score: 6 },
+    { name: 'Mercedez Regrera Brito', score: 7 },
+    { name: 'Pamela Anderson', score: 3 },
+    { name: 'Enrique Perez Lijó', score: 6 },
+    { name: 'Pedro Benitez Pacheco', score: 8 },
+    { name: 'Ayumi Hamasaki', score: 4 },
+    { name: 'Robert Kiyosaki', score: 2 },
+    { name: 'Keanu Reeves', score: 10 }
+];
+
+const sumExams = exams.reduce((acc, exam) => acc + exam.score, 0);
+
+console.log('La suma de todas las notas es ' + sumExams);
+
+// 7.2 Dado el mismo array, haz una suma de todos las notas de los exámenes de los alumnos que estén aprobados usando la función .reduce().
+
+const approvedExams = exams.filter(exam => exam.score >= 5);
+
+const sumApprovedExams = approvedExams.reduce((acc, exam) => acc + exam.score, 0);
+
+console.log('La suma de todas las notas de exámenes aprobados es ' + sumApprovedExams);
+
+// 7.3 Dado el mismo array, haz la media de las notas de todos los exámenes .reduce().
+
+const examsAverage = exams.reduce((acc, exam) => acc + exam.score / exams.length, 0);
+
+console.log('La media de todas las notas es ' + examsAverage.toFixed(2));
+
+// Ejercicio 8 - Bonus
+
+// 8.1 Dado el siguiente javascript filtra los videojuegos por gender = 'RPG' usando .filter() y usa .reduce() para conseguir la media de sus .score.
+
+const videogames = [
+    { name: 'Final Fantasy VII', genders: ['RPG'], score: 9.5 },
+    { name: 'Assassins Creed Valhalla', genders: ['Aventura', 'RPG'], score: 4.5 },
+    { name: 'The last of Us 2', genders: ['Acción', 'Aventura'], score: 9.8 },
+    { name: 'Super Mario Bros', genders: ['Plataforma'], score: 8.5 },
+    { name: 'Genshin Impact', genders: ['RPG', 'Aventura'], score: 7.5 },
+    { name: 'Legend of Zelda: Breath of the wild', genders: ['RPG'], score: 10 },
+];
+
+const rpgVideogames = videogames.filter(videogame => videogame.genders.includes('RPG'));
+
+const rpgVideogamesAverage = rpgVideogames.reduce((acc, videogame) => acc + videogame.score / rpgVideogames.length, 0);
+
+console.log(`La media de las notas de todos los videojuegos de género RPG es ${rpgVideogamesAverage.toFixed(2)}`);
+
+// Ejercicio 9
+
+// 9.1 Dado el siguiente javascript usa forof para recorrer el array de películas, genera un nuevo array con las categorías de las películas e imprime por consola el array de categorías. Ten en cuenta que las categorías no deberían repetirse.
+
+const movies_2 = [
+    {
+        title: "Bracula: Condemor II",
+        duration: 192,
+        categories: ["comedia", "aventura"],
+    },
+    {
+        title: "Spider-Man: No Way Home",
+        duration: 122,
+        categories: ["aventura", "acción"],
+    },
+    {
+        title: "The Voices",
+        duration: 223,
+        categories: ["comedia", "thriller"],
+    },
+    {
+        title: "Shrek",
+        duration: 111,
+        categories: ["comedia", "aventura", "animación"],
+    },
+];
+
+const movieCategories = (array) => {
+    const newCategories = [];
+    for (const movie of array) {
+        for (const category of movie.categories) {
+            if (!newCategories.includes(category)) {
+                newCategories.push(category);
+            }
+        }
+    }
+    return newCategories;
+};
+
+console.log(movieCategories(movies_2));
+
+// Ejercicio 10
+
+// 10.1 Dado el siguiente javascript usa forof y forin para hacer la media del volumen de todos los sonidos favoritos que tienen los usuarios.
+
+const users_3 = [
+    {
+        name: "Alberto",
+        favoriteSounds: {
+            waves: { format: "mp3", volume: 50 },
+            rain: { format: "ogg", volume: 60 },
+            firecamp: { format: "mp3", volume: 80 },
+        },
+    },
+    {
+        name: "Antonio",
+        favoriteSounds: {
+            waves: { format: "mp3", volume: 30 },
+            shower: { format: "ogg", volume: 55 },
+            train: { format: "mp3", volume: 60 },
+        },
+    },
+    {
+        name: "Pedro",
+        favoriteSounds: {
+            shower: { format: "mp3", volume: 50 },
+            train: { format: "ogg", volume: 60 },
+            firecamp: { format: "mp3", volume: 80 },
+        },
+    },
+    {
+        name: "Cristina",
+        favoriteSounds: {
+            waves: { format: "mp3", volume: 67 },
+            wind: { format: "ogg", volume: 35 },
+            firecamp: { format: "mp3", volume: 60 },
+        },
+    },
+];
+
+const volumeAverage = (array) => {
+    const volumeLevels = [];
+
+    for (const user of array) {
+        const { favoriteSounds } = user;
+        for (const sound in favoriteSounds) {
+            const soundsConfig = favoriteSounds[sound];
+            volumeLevels.push(soundsConfig.volume);
+        }
+    }
+    return volumeLevels.reduce((acc, currentValue) => acc + currentValue / volumeLevels.length, 0);
+};
+
+console.log(`La media de volumen de todos los sonidos favoritos de los usuarios es ${volumeAverage(users_3)}`);
