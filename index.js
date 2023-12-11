@@ -414,3 +414,146 @@ const volumeAverage = (array) => {
 };
 
 console.log(`La media de volumen de todos los sonidos favoritos de los usuarios es ${volumeAverage(users_3)}`);
+
+// Ejercicio 11
+
+// 11.1 Dado el siguiente javascript usa forof y forin para saber cuantas veces ha sido cada sonido agregado por los usuarios a favorito. Para ello recorre la lista de usuarios y usa forin para recoger el nombre de los sonidos que el usuario tenga como favoritos. Una vez accedas a ellos piensa en la mejor forma de hacer un conteo de cada vez que ese sonido se repita como favorito en cada usuario.
+
+const users_4 = [
+    {
+        name: "Alberto",
+        favoriteSounds: {
+            waves: { format: "mp3", volume: 50 },
+            rain: { format: "ogg", volume: 60 },
+            firecamp: { format: "mp3", volume: 80 },
+        },
+    },
+    {
+        name: "Antonio",
+        favoriteSounds: {
+            waves: { format: "mp3", volume: 30 },
+            shower: { format: "ogg", volume: 55 },
+            train: { format: "mp3", volume: 60 },
+        },
+    },
+    {
+        name: "Pedro",
+        favoriteSounds: {
+            shower: { format: "mp3", volume: 50 },
+            train: { format: "ogg", volume: 60 },
+            firecamp: { format: "mp3", volume: 80 },
+        },
+    },
+    {
+        name: "Cristina",
+        favoriteSounds: {
+            waves: { format: "mp3", volume: 67 },
+            wind: { format: "ogg", volume: 35 },
+            firecamp: { format: "mp3", volume: 60 },
+        },
+    },
+];
+
+const soundsPicker = (array) => {
+    const soundTracks = [];
+
+    for (const user of array) {
+        const { favoriteSounds } = user;
+
+        for (const sound in favoriteSounds) {
+            soundTracks.push(sound);
+        }
+    }
+    return soundTracks;
+};
+
+console.log(soundsPicker(users_4));
+
+const countSounds = (array) => {
+    const soundCount = {};
+
+    for (const sound of array) {
+        if (sound in soundCount) {
+            soundCount[sound]++;
+        } else {
+            soundCount[sound] = 1;
+        }
+    }
+
+    return soundCount;
+};
+
+const soundCounts = countSounds(soundsPicker(users_4));
+
+for (const sound in soundCounts) {
+    console.log(`${sound}: ${soundCounts[sound]}`);
+}
+
+// Ejercicio 12
+
+// 12.1 Crea una función llamada findArrayIndex que reciba como parámetros un array de textos y un texto y devuelve la posición del array cuando el valor del array sea igual al valor del texto que enviaste como parámetro. Haz varios ejemplos y compruébalos.
+
+const mainCharacters = [
+    "Luke",
+    "Leia",
+    "Han Solo",
+    "Chewbacca",
+    "Rey",
+    "Anakin",
+    "Obi-Wan",
+];
+
+const findArrayIndex = (array, string) => array.indexOf(string);
+
+console.log(findArrayIndex(mainCharacters, 'Obi-Wan'));
+console.log(findArrayIndex(mainCharacters, 'Obi-Juan'));
+
+// Ejercicio 13
+
+// 13.1 Usando la función anterior benefíciate de poder conocer el índice del array para crear una función llamada removeItem que, pasándole un array y un texto como parámetros (los mismos parámetros que en el anterior ejercicio), llame a la función anteriormente creada findArrayIndex y obtén el índice para posteriormente usar splice para eliminar el elemento del array. Finalmente retorna el array.
+
+const removeItem = (array, string) => {
+    if (findArrayIndex(mainCharacters, string) !== -1) {
+        array.splice(findArrayIndex(mainCharacters, string), 1);
+    }
+    return array;
+};
+
+console.log(removeItem(mainCharacters, 'Anakin'));
+
+// Ejercicio 14
+
+// 14.1 Crea una función llamada rollDice() que reciba como parámetro el numero de caras que queramos que tenga el dado que deberá simular el código dentro de la función. Como hemos dicho, que la función use el parámetro para simular una tirada de dado y retornar el resultado.
+
+const rollDice = (sidesNum) => Math.floor(Math.random() * sidesNum) + 1;
+
+console.log(rollDice(6));
+
+// Ejercicio 15
+
+// 15.1 Crea una función llamada swap() que reciba un array y dos parámetros que sean índices del array. La función deberá intercambiar la posición de los valores de los índices que hayamos enviado como parámetro. Retorna el array resultante.
+
+const fantasticFour = [
+    "La antorcha humana",
+    "Mr. Fantástico",
+    "La mujer invisible",
+    "La cosa",
+];
+
+const swap = (array, position1, position2) => {
+
+    const selectedOne = array[position1];
+    const selectedTwo = array[position2];
+
+    if (position1 < position2) {
+        array.splice(array.indexOf(selectedTwo), 1, selectedOne);
+        array.splice(array.indexOf(selectedOne), 1, selectedTwo);
+    } else {
+        array.splice(array.indexOf(selectedOne), 1, selectedTwo);
+        array.splice(array.indexOf(selectedTwo), 1, selectedOne);
+    }
+    return array;
+};
+
+console.log(swap(fantasticFour, 3, 0));
+console.log(swap(fantasticFour, 0, 1));
